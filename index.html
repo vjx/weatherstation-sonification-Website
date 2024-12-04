@@ -143,8 +143,36 @@
             data_3.feeds.length > 0
           ) {
             //Mapping Protocol:
+
+            function converterPaParaHz(
+              pressaoPa,
+              pMin = 100000,
+              pMax = 110000,
+              fMin = 200,
+              fMax = 5000
+            ) {
+              // Coeficientes da relação linear
+              const a = (fMax - fMin) / (pMax - pMin);
+              const b = fMin - a * pMin;
+
+              // Calcula a frequência correspondente
+              let frequenciaHz = a * pressaoPa + b;
+
+              // Garante que a frequência esteja dentro do intervalo
+              frequenciaHz = Math.max(fMin, Math.min(fMax, frequenciaHz));
+
+              return frequenciaHz;
+            }
+
+            const frequencia_1 = converterPaParaHz(data.feeds[0].field1);
+            console.log(
+              `Pressão_1: ${
+                data.feeds[0].field1
+              } Pa -> Frequência_1: ${frequencia_1.toFixed(2)} Hz`
+            );
+
             const totalArray = [
-              data.feeds[0].field1 * 10,
+              frequencia_1, // Pressure, so we use the converterPaParaHz function.
               data_2.feeds[0].field1 * 10, //Temperature, so we multiply by 10
               data_3.feeds[0].field1 * 10, //Temperature, so we multiply by 10
             ];
