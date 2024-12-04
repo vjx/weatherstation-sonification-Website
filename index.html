@@ -77,6 +77,7 @@
         }
       }
 
+      //Mostra os Nomes das estações e os dados na página:
       function displayData(data, containerId) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
@@ -95,7 +96,7 @@
           checkbox.classList.add("station-checkbox");
 
           const field = document.createElement("p");
-          field.textContent = `${nome} : ${entry.field1}`;
+          field.textContent = `${nome} | Pressure: ${entry.field1} Pa`;
 
           entryElement.appendChild(field);
           field.appendChild(checkbox);
@@ -142,6 +143,7 @@
             data_2.feeds.length > 0 &&
             data_3.feeds.length > 0
           ) {
+           
             //Mapping Protocol:
 
             function converterPaParaHz(
@@ -165,11 +167,7 @@
             }
 
             const frequencia_1 = converterPaParaHz(data.feeds[0].field1);
-            console.log(
-              `Pressão_1: ${
-                data.feeds[0].field1
-              } Pa -> Frequência_1: ${frequencia_1.toFixed(2)} Hz`
-            );
+            console.log(`Pressão_1: ${data.feeds[0].field1} Pa -> Frequência_1: ${frequencia_1.toFixed(2)} Hz`); // Mostra os valores na consola
 
             const totalArray = [
               frequencia_1, // Pressure, so we use the converterPaParaHz function.
