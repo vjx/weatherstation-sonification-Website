@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  
   <head>
-    
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Station Sonification</title>
@@ -32,8 +29,8 @@
       function addMarker(latitude, longitude, stationName) {
         if (latitude !== 0 && longitude !== 0) {
           // Convert lat/long to canvas coordinates (simple projection)
-          const x = mapCanvas.width * (longitude + 180) / 360; // Map longitude to X
-          const y = mapCanvas.height * (90 - latitude) / 180;  // Map latitude to Y
+          const x = (mapCanvas.width * (longitude + 180)) / 360; // Map longitude to X
+          const y = (mapCanvas.height * (90 - latitude)) / 180; // Map latitude to Y
 
           mapMarkers.push({ x, y, stationName }); // Save marker
           renderMarkers();
@@ -123,7 +120,9 @@
 
       async function fetchDataAndPlayNotes() {
         const checkboxes = document.querySelectorAll("input[type='checkbox']");
-        const states = Array.from(checkboxes).map((checkbox) => checkbox.checked);
+        const states = Array.from(checkboxes).map(
+          (checkbox) => checkbox.checked
+        );
 
         try {
           const [response1, response2, response3] = await Promise.all([
@@ -143,10 +142,11 @@
             data_2.feeds.length > 0 &&
             data_3.feeds.length > 0
           ) {
+            //Mapping Protocol:
             const totalArray = [
               data.feeds[0].field1 * 10,
-              data_2.feeds[0].field1 * 10,
-              data_3.feeds[0].field1 * 10,
+              data_2.feeds[0].field1 * 10, //Temperature, so we multiply by 10
+              data_3.feeds[0].field1 * 10, //Temperature, so we multiply by 10
             ];
 
             const playArray = states.reduce((acc, state, index) => {
@@ -165,9 +165,12 @@
         }
       }
 
-      const apiUrl_1 = "https://api.thingspeak.com/channels/2699354/feeds.json?&results=1";
-      const apiUrl_2 = "https://api.thingspeak.com/channels/12397/feeds.json?&results=1";
-      const apiUrl_3 = "https://api.thingspeak.com/channels/2418714/feeds.json?api_key=956JQOA0QHD13XG2&results=1";
+      const apiUrl_1 =
+        "https://api.thingspeak.com/channels/2699354/feeds.json?&results=1"; //Mick Inovlabs Algés
+      const apiUrl_2 =
+        "https://api.thingspeak.com/channels/12397/feeds.json?&results=1"; // Thingspeak Test Weatherstation
+      const apiUrl_3 =
+        "https://api.thingspeak.com/channels/2418714/feeds.json?api_key=956JQOA0QHD13XG2&results=1"; // 3A_JBarros_23-24
 
       // Initialize on load
       window.onload = function () {
@@ -176,52 +179,51 @@
       };
     </script>
 
-   <style>
-  body {
-    display: flex;
-    flex-direction: row; /* Mantenha as seções lado a lado */
-    flex-wrap: wrap;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-  }
+    <style>
+      body {
+        display: flex;
+        flex-direction: row; /* Mantenha as seções lado a lado */
+        flex-wrap: wrap;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+      }
 
-     .logo_container {    
-    flex-basis: 100%;    
-  }
-     
-  .data-section {
-    flex: 0.4; /* Reserve 40% da largura da página para esta seção */
-    overflow-y: auto;
-    max-height: 100vh;
-    background-color: #f9f9f9; /* Para destacar */
-    border-right: 1px solid #ddd; /* Adicione uma borda para separação */
-  }
+      .logo_container {
+        flex-basis: 100%;
+      }
 
-  .map-section {
-    flex: 0.6; /* Reserve 60% da largura para esta seção */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+      .data-section {
+        flex: 0.4; /* Reserve 40% da largura da página para esta seção */
+        overflow-y: auto;
+        max-height: 100vh;
+        background-color: #f9f9f9; /* Para destacar */
+        border-right: 1px solid #ddd; /* Adicione uma borda para separação */
+      }
 
-  #map-canvas {
-    width: 100%;
-    height: 400px;
-    border: 1px solid black;
-  }
+      .map-section {
+        flex: 0.6; /* Reserve 60% da largura para esta seção */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-  .data-entry {
-    margin-bottom: 15px;
-  }
+      #map-canvas {
+        width: 100%;
+        height: 400px;
+        border: 1px solid black;
+      }
 
-  button {
-    margin-top: 5px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-</style>
+      .data-entry {
+        margin-bottom: 15px;
+      }
 
+      button {
+        margin-top: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    </style>
   </head>
 
   <body>
@@ -241,13 +243,13 @@
 
     <!-- Data Section -->
     <div class="data-section">
-      
-
       <h1>Weather Station Latest Data:</h1>
       <div id="data-container"></div>
       <div id="data-container_2"></div>
       <div id="data-container_3"></div>
-      <button onclick="fetchDataAndPlayNotes()">Click me to SONIFY fetched data!</button>
+      <button onclick="fetchDataAndPlayNotes()">
+        Click me to SONIFY fetched data!
+      </button>
 
       <h2>Sonification of weather stations data</h2>
       <h3>Mapping protocol:</h3>
