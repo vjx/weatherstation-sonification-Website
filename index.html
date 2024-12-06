@@ -228,10 +228,12 @@
       }
 
       .map-section {
-        flex: 0.6; /* Reserve 60% da largura para esta seção */
+        flex: 0.5; /* Reserve 60% da largura para esta seção */
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding-left: 10%;
+
       }
 
       #map-canvas {
@@ -277,19 +279,23 @@
         Click me to SONIFY fetched data!
       </button>
 
+      <br><br><br><br><br><br><br>
+      
       <h2>Sonification of weather stations data</h2>
       <h3>Mapping protocol:</h3>
       <p>Each weather station is assigned an oscillator.</p>
       <p>
-        The latest temperature data in °C is converted to the speed of the
-        oscillator in Hz.
+        The mapping protocol converts atmospheric pressure (Pa) to frequency (Hz) using a linear relationship,
+        where 93,000 Pa maps to 200 Hz and 135,000 Pa maps to 5,000 Hz, 
+        calculated with the formula f(P)=a⋅P+bf(P)=a⋅P+b,
+        ensuring results stay within the defined range
       </p>
-      <p>FREQUENCY = TEMPERATURE x 10</p>
+      
     </div>
 
     <!-- Map Section -->
     <div class="map-section">
-      <h1>Weather Stations Location</h1>
+      <h1>Weather Stations Locations</h1>
       <canvas id="map-canvas" width="800" height="400"></canvas>
     </div>
   </body>
