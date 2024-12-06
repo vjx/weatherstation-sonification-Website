@@ -77,16 +77,16 @@
             response3.json(),
           ]);
 
-          displayData(data, "data-container");
-          displayData(data_2, "data-container_2");
-          displayData(data_3, "data-container_3");
+          displayDataPressurePa(data, "data-container");
+          displayDataPressurePa(data_2, "data-container_2");
+          displayDataPressurePa(data_3, "data-container_3");
         } catch (error) {
           console.error(error);
         }
       }
 
-      //Mostra os Nomes das estações e os dados na página:
-      function displayData(data, containerId) {
+      //Mostra os Nomes das estações e os dados na página para Pressão em Pa:
+      function displayDataPressurePa(data, containerId) {
         const container = document.getElementById(containerId);
         container.innerHTML = "";
 
@@ -104,12 +104,11 @@
           checkbox.classList.add("station-checkbox");
 
           const field = document.createElement("p");
-          field.textContent = `${nome} | Pressure: ${entry.field1} Pa`;
+          field.textContent = `${nome} | Pressure: ${entry.field1} Pa`; // Escreve o nome da estação e a pressão no documento
 
           entryElement.appendChild(field);
           field.appendChild(checkbox);
           container.appendChild(entryElement);
-
           addMarker(latitude, longitude, nome);
         }
       }
@@ -174,11 +173,13 @@
             }
 
             const frequencia_1 = converterPaParaHz(data.feeds[0].field1);
+            
+             // Mostra os valores na consola:
             console.log(
               `Pressão_1: ${
                 data.feeds[0].field1
               } Pa -> Frequência_1: ${frequencia_1.toFixed(2)} Hz`
-            ); // Mostra os valores na consola
+            );
 
             const totalArray = [
               frequencia_1, // Pressure, so we use the converterPaParaHz function.
