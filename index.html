@@ -19,7 +19,8 @@
         // Set map background image (basic map image URL)
         const mapImg = new Image();
         //mapImg.src = "https://img1.pnghut.com/15/9/10/JufsjTxGRb/world-map-black-and-white-wikipedia-silhouette.jpg";
-        mapImg.src = "https://upload.wikimedia.org/wikipedia/commons/c/c0/Equirectangular_projection_world_map_without_borders.svg";
+        mapImg.src =
+          "https://upload.wikimedia.org/wikipedia/commons/c/c0/Equirectangular_projection_world_map_without_borders.svg";
         mapImg.onload = () => {
           ctx.drawImage(mapImg, 0, 0, mapCanvas.width, mapCanvas.height);
           renderMarkers(); // Render any markers already stored
@@ -49,9 +50,16 @@
           ctx.fill();
 
           // Add station name near the marker
-          ctx.font = "15px Arial";
-          ctx.fillStyle = "yellow"; // Change text color to white
-          ctx.fillText(marker.stationName, marker.x + 5, marker.y - 5);
+          ctx.font = "10px Arial";
+
+          // Set border properties
+          ctx.strokeStyle = "green"; // Border color
+          ctx.lineWidth = 2; // Border thickness
+          ctx.strokeText(marker.stationName, marker.x + 5, marker.y - 5); // Draw border
+
+          // Set fill properties
+          ctx.fillStyle = "white"; // Fill color
+          ctx.fillText(marker.stationName, marker.x + 5, marker.y - 5); // Fill text
         }
       }
 
@@ -143,7 +151,6 @@
             data_2.feeds.length > 0 &&
             data_3.feeds.length > 0
           ) {
-           
             //Mapping Protocol Pa to Hz:
 
             function converterPaParaHz(
@@ -167,7 +174,11 @@
             }
 
             const frequencia_1 = converterPaParaHz(data.feeds[0].field1);
-            console.log(`Pressão_1: ${data.feeds[0].field1} Pa -> Frequência_1: ${frequencia_1.toFixed(2)} Hz`); // Mostra os valores na consola
+            console.log(
+              `Pressão_1: ${
+                data.feeds[0].field1
+              } Pa -> Frequência_1: ${frequencia_1.toFixed(2)} Hz`
+            ); // Mostra os valores na consola
 
             const totalArray = [
               frequencia_1, // Pressure, so we use the converterPaParaHz function.
@@ -233,7 +244,6 @@
         flex-direction: column;
         align-items: center;
         padding-left: 10%;
-
       }
 
       #map-canvas {
@@ -267,7 +277,7 @@
           id="logo"
         />
       </a>
-      <br><br><br><br><br>
+      <br /><br /><br /><br /><br />
     </div>
 
     <!-- Data Section -->
@@ -280,18 +290,17 @@
         Click me to SONIFY fetched data!
       </button>
 
-      <br><br><br><br><br><br><br>
-      
+      <br /><br /><br /><br /><br /><br /><br />
+
       <h2>Sonification of weather stations data</h2>
       <h3>Mapping protocol:</h3>
       <p>Each weather station is assigned an oscillator.</p>
       <p>
-        The mapping protocol converts atmospheric pressure (Pa) to frequency (Hz) using a linear relationship,
-        where 93,000 Pa maps to 200 Hz and 135,000 Pa maps to 5,000 Hz, 
-        calculated with the formula f(P)=a⋅P+bf(P)=a⋅P+b,
-        ensuring results stay within the defined range
+        The mapping protocol converts atmospheric pressure (Pa) to frequency
+        (Hz) using a linear relationship, where 93,000 Pa maps to 200 Hz and
+        135,000 Pa maps to 5,000 Hz, calculated with the formula
+        f(P)=a⋅P+bf(P)=a⋅P+b, ensuring results stay within the defined range
       </p>
-      
     </div>
 
     <!-- Map Section -->
