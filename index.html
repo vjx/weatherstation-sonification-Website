@@ -19,7 +19,7 @@
         // Set map background image (basic map image URL)
         const mapImg = new Image();
         //mapImg.src = "https://img1.pnghut.com/15/9/10/JufsjTxGRb/world-map-black-and-white-wikipedia-silhouette.jpg";
-        mapImg.src = "";
+        mapImg.src = "https://upload.wikimedia.org/wikipedia/commons/c/c0/Equirectangular_projection_world_map_without_borders.svg";
         mapImg.onload = () => {
           ctx.drawImage(mapImg, 0, 0, mapCanvas.width, mapCanvas.height);
           renderMarkers(); // Render any markers already stored
@@ -49,8 +49,8 @@
           ctx.fill();
 
           // Add station name near the marker
-          ctx.font = "10px Arial";
-          ctx.fillStyle = "black";
+          ctx.font = "15px Arial";
+          ctx.fillStyle = "yellow"; // Change text color to white
           ctx.fillText(marker.stationName, marker.x + 5, marker.y - 5);
         }
       }
@@ -144,7 +144,7 @@
             data_3.feeds.length > 0
           ) {
            
-            //Mapping Protocol:
+            //Mapping Protocol Pa to Hz:
 
             function converterPaParaHz(
               pressaoPa,
