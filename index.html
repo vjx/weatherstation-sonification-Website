@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
 
     <!-- Tone.js -->
     <script src="https://unpkg.com/tone"></script>
-
+    
     <script>
       let mapCanvas, ctx;
       const mapMarkers = []; // Store all map markers for rendering
@@ -220,7 +220,7 @@
     <style>
       body {
         display: flex;
-        flex-direction: row; /* Mantenha as seções lado a lado */
+        flex-direction: row;
         flex-wrap: wrap;
         font-family: Arial, sans-serif;
         margin: 0;
@@ -229,22 +229,25 @@
 
       .logo_container {
         flex-basis: 100%;
+        text-align: center;
+        margin-bottom: 20px;
       }
 
       .data-section {
-        flex: 0.4; /* Reserve 40% da largura da página para esta seção */
+        flex: 1;
         overflow-y: auto;
         max-height: 100vh;
-        background-color: #f9f9f9; /* Para destacar */
-        border-right: 1px solid #ddd; /* Adicione uma borda para separação */
+        background-color: #f9f9f9;
+        border-right: 1px solid #ddd;
+        padding: 10px;
       }
 
       .map-section {
-        flex: 0.5; /* Reserve 60% da largura para esta seção */
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding-left: 10%;
+        padding: 10px;
       }
 
       #map-canvas {
@@ -262,13 +265,61 @@
         padding: 5px 10px;
         cursor: pointer;
       }
+
+      /* Estilos para dispositivos menores */
+      @media (max-width: 768px) {
+        body {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .logo_container {
+          margin-bottom: 10px;
+        }
+
+        .data-section {
+          flex: 1;
+          order: 1;
+          border-right: none;
+          border-bottom: 1px solid #ddd;
+          padding: 10px;
+        }
+
+        .map-section {
+          flex: 1;
+          order: 2;
+          padding: 10px;
+        }
+
+        #map-canvas {
+          height: 300px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #map-canvas {
+          height: 200px;
+        }
+
+        h1, h2, h3 {
+          font-size: 1.2rem;
+        }
+
+        p {
+          font-size: 0.9rem;
+        }
+
+        button {
+          font-size: 0.8rem;
+          padding: 5px;
+        }
+      }
     </style>
   </head>
 
   <body>
     <!-- Header -->
     <div class="logo_container">
-      <span class="logo_helper"></span>
       <a href="https://soundscapes.nuclio.org/">
         <img
           src="https://soundscapes.nuclio.org/wp-content/uploads/2024/02/SoundscapesLogo.png"
@@ -278,7 +329,6 @@
           id="logo"
         />
       </a>
-      <br /><br /><br /><br /><br />
     </div>
 
     <!-- Data Section -->
@@ -290,8 +340,6 @@
       <button onclick="fetchDataAndPlayNotes()">
         Click me to SONIFY fetched data!
       </button>
-
-      <br /><br /><br /><br /><br /><br /><br />
 
       <h2>Sonification of weather stations data</h2>
       <h3>Mapping protocol:</h3>
