@@ -78,8 +78,8 @@
           ]);
 
           displayDataPressurePa(data, "data-container");
-          displayDataPressurePa(data_2, "data-container_2");
-          displayDataPressurePa(data_3, "data-container_3");
+          displayDataTempC(data_2, "data-container_2");
+          displayDataTempC(data_3, "data-container_3");
         } catch (error) {
           console.error(error);
         }
@@ -113,6 +113,34 @@
         }
       }
 
+      //Mostra os Nomes das estações e os dados na página para Temperatura em Cº:
+      function displayDataTempC(data, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        const nome = data.channel.name; // Nome do feed.
+        const latitude = parseFloat(data.channel.latitude); // Latitude.
+        const longitude = parseFloat(data.channel.longitude); // Longitude.
+
+        for (const entry of data.feeds) {
+          const entryElement = document.createElement("div");
+          entryElement.classList.add("data-entry");
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.checked = true;
+          checkbox.classList.add("station-checkbox");
+
+          const field = document.createElement("p");
+          field.textContent = `${nome} | Temperature: ${entry.field1} °C`; // Escreve o nome da estação e a pressão no documento
+
+          entryElement.appendChild(field);
+          field.appendChild(checkbox);
+          container.appendChild(entryElement);
+          addMarker(latitude, longitude, nome);
+        }
+      }
+      
       function playNotes(playArray) {
         const gainNode = new Tone.Gain(0.2).toDestination(); // Adjust volume
         const synth = new Tone.PolySynth().connect(gainNode);
